@@ -1,0 +1,57 @@
+package ru.springCrud.model;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Item")
+public class Item {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "item_name")
+    private String item;
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
+
+    public Item(){}
+
+    public Item(String item, Person owner) {
+        this.item = item;
+        this.owner=owner;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", item='" + item + '\'' +
+                '}';
+    }
+}
